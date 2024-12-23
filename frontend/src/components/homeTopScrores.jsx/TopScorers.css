@@ -1,0 +1,124 @@
+/* General smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Container for the Top Scorers section */
+.top-scorers-container {
+    padding: 20px;
+    background-color: #003366; /* Dark blue background */
+    color: white;
+    margin-bottom: 1px;
+}
+
+/* Section title styling */
+.section-title {
+    text-align: center;
+    font-size: 24px; /* Large enough for visibility */
+    margin-bottom: 20px; /* Space below the title */
+    font-weight: bold;
+    color: #ffffff; /* Light color for contrast */
+}
+
+/* Grid Layout for the leagues */
+.scorers-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Space between each card */
+}
+
+/* Each league's column */
+.league-column {
+    width: 18%; /* Smaller width to fit more items in a row */
+    background: linear-gradient(145deg, #ffffff, #ffffff); /* Gradient background */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Hover effects for league columns */
+.league-column:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Title of the league */
+.league-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px; /* Space below the league title */
+    font-weight: bold;
+    color: #333; /* Dark text for readability */
+}
+
+/* Player image styling */
+.league-column img {
+    width: 90%; /* Slightly reduced to fit the design */
+    height: auto;
+    border-radius: 50%; /* Fully rounded image */
+    margin-bottom: 15px; /* Space below the image */
+    object-fit: contain; /* Ensures the image covers the space properly */
+}
+
+/* Player name and goals styling */
+.player {
+    font-size: 16px;
+    font-weight: normal;
+    color: #333; /* Dark text for consistency */
+}
+
+.player-name {
+    font-weight: bold;
+}
+
+.goals {
+    color: #d51916; /* Red color to highlight goals */
+    font-weight: bold;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1200px) {
+    .league-column {
+        width: 18%; /* Adjust width for medium screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .league-column {
+        width: 18%; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .league-column {
+        width: 100%; /* Stack columns on small screens */
+    }
+
+    .scorers-grid {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 10px; /* Adjust gap between items */
+        justify-content: center; /* Center the items */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 20px; /* Smaller font size for small screens */
+    }
+
+    .league-column h3 {
+        font-size: 14px; /* Smaller league title */
+    }
+
+    .league-column img {
+        width: auto;
+        width: 100%; /* Slightly smaller images for very small screens */
+    }
+
+    .player {
+        font-size: 14px; /* Smaller text for player information */
+    }
+}

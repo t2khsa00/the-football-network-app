@@ -1,0 +1,164 @@
+/* Base Header Styling */
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Upper Section Styling (Dark Blue or Green Color) */
+.header-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #003366; /* Dark Blue Color */
+  padding: 15px 30px;
+  border-bottom: 2px solid #002244;  /* Darker Blue border */
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 25px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-family: Verdana;
+  color: white;
+  font-weight: 600;
+}
+
+/* Profile and Language Select */
+.header-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.language-select, .profile-box {
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.language-select {
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.language-select .fa-globe {
+  margin-right: 5px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 70px;
+  justify-content: center;
+}
+
+.profile-icon {
+  font-size: 18px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lower Section Styling */
+.header-lower {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #003366;  /* Dark Blue Background */
+  padding: 10px 30px;
+}
+
+.navbar-links a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.navbar-links a:hover {
+  background-color: #FFB81C; /* Darker blue on hover */
+}
+
+.search-bar input {
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  width: 200px;
+}
+
+.search-bar input::placeholder {
+  font-size: 14px;
+}
+
+/* Hover Effects for Profile and Language */
+.language-select:hover,
+.profile-box:hover {
+  background-color: #FFB81C; /* Yellow on hover */
+  cursor: pointer;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .header-upper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    width: 80px;  /* Reduce logo size for mobile */
+    height: 70px;  /* Adjust height */
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .header-actions {
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .navbar-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of links */
+    gap: 10px; /* Adjust gap between links */
+  }
+  
+  .navbar-links a {
+    display: flex; /* Change to inline-block for better wrapping */
+    font-size: 15px;
+    padding: 5px 10px; /* Add padding for better touch targets */
+    text-align:center; /* Center align text */
+  }
+  .search-bar input {
+    width: 100%;
+  }
+}
