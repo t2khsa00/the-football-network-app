@@ -5,6 +5,7 @@ import Fixtures from './components/homeFixtures.jsx/Fixtures';
 import TopScorers from './components/homeTopScrores.jsx/TopScorers';
 import News from './components/news/News';
 import LastSeasonChampions from './components/chamiopns/LastSeasonChampions';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   useEffect(() => {
@@ -28,7 +29,9 @@ const App = () => {
       <Fixtures />
       <News/>
       <LastSeasonChampions />
+      <Footer />
     </div>
+    
   );
 };
 

@@ -1,8 +1,13 @@
 .champions-container {
-    background-color: #003366; /* Dark Blue background */
+    background-color: #003366; 
     padding: 30px;
     color: white;
     margin-top: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .champions-title {
@@ -11,14 +16,26 @@
     font-weight: bold;
     margin-bottom: 35px;
     font-family: Verdana;
+    width: 100%;
   }
   
   .champions-boxes {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     justify-items: center;
+    max-width: auto;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
   }
+
+  .champions-boxes::-webkit-scrollbar {
+    display: none; /* WebKit browsers */
+  }
+  
   
   .champion-box {
     background-color: #ffffff;
@@ -33,7 +50,7 @@
   }
   
   .champion-box:hover {
-    transform: scale(1.05); /* Hover effect to scale up */
+    transform: scale(1.02)
   }
   
   .champion-box h3 {
@@ -57,21 +74,77 @@
     object-fit: contain;
     margin-top: 10px;
   }
-  
+
   /* Responsive Design */
-  @media (max-width: 768px) {
-    .champions-boxes {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns layout for medium screens */
-    }
+@media (max-width: 1024px) {
+  .champions-boxes {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns layout for tablets and small screens */
   }
-  
-  @media (max-width: 480px) {
-    .champions-boxes {
-      grid-template-columns: 1fr; /* Single column layout for small screens */
-    }
-  
-    .champions-title {
-      font-size: 1.5rem; /* Adjust title font size */
-    }
+
+  .champions-title {
+    font-size: 1.7rem; /* Slightly smaller title for tablets */
   }
-  
+
+  .champion-box {
+    height: 280px; /* Increase height for better visual proportion on tablets */
+  }
+
+  .team-logo {
+    width: 100px; /* Reduce logo size for tablets */
+    height: 100px; /* Reduce logo size for tablets */
+  }
+
+  .team-name {
+    font-size: 1rem; /* Adjust team name font size */
+  }
+}
+
+@media (max-width: 768px) {
+  .champions-boxes {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns layout for medium screens */
+  }
+
+  .champions-title {
+    font-size: 1.6rem; /* Adjust title font size for medium screens */
+  }
+
+  .champion-box {
+    height: 280px; /* Adjust height for better proportion */
+  }
+
+  .team-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .team-name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .champions-boxes {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .champions-title {
+    font-size: 1.5rem; /* Adjust title font size for small screens */
+  }
+
+  .champion-box {
+    height: 220px; /* Decrease height for small screens */
+  }
+
+  .team-logo {
+    width: 80px; /* Smaller logo size for small screens */
+    height: 80px; /* Smaller logo size for small screens */
+  }
+
+  .team-name {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+
+  .champion-box h3 {
+    font-size: 1rem; /* Adjust league name font size */
+  }
+}

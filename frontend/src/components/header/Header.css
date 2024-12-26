@@ -95,7 +95,7 @@
 
 .navbar-links a {
   color: white;
-  font-size: 16px;
+  font-size: 1.2rem;
   text-decoration: none;
   font-weight: 600;
   padding: 5px 15px;
@@ -115,7 +115,7 @@
 }
 
 .search-bar input::placeholder {
-  font-size: 14px;
+  font-size:20px;
 }
 
 /* Hover Effects for Profile and Language */
@@ -160,5 +160,9 @@
   }
   .search-bar input {
     width: 100%;
+    font-size: 12px;
+  }
+  .search-bar input::placeholder {
+    font-size:12px;
   }
 }
