@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/header/Header';
 import Fixtures from './components/homeFixtures.jsx/Fixtures';
 import TopScorers from './components/homeTopScrores.jsx/TopScorers';
+import News from './components/news/News';
+import LastSeasonChampions from './components/chamiopns/LastSeasonChampions';
 
 const App = () => {
   useEffect(() => {
@@ -24,6 +26,8 @@ const App = () => {
       <Header />
       <TopScorers />
       <Fixtures />
+      <News/>
+      <LastSeasonChampions />
     </div>
   );
 };

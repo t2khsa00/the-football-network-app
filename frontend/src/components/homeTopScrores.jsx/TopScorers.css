@@ -9,15 +9,18 @@ html {
     background-color: #003366; /* Dark blue background */
     color: white;
     margin-bottom: 1px;
+    margin-top: 1px;
+    padding-bottom: 35px;
 }
 
 /* Section title styling */
 .section-title {
     text-align: center;
     font-size: 24px; /* Large enough for visibility */
-    margin-bottom: 20px; /* Space below the title */
+    margin-bottom: 40px; /* Space below the title */
     font-weight: bold;
     color: #ffffff; /* Light color for contrast */
+    padding-bottom: 40px;
 }
 
 /* Grid Layout for the leagues */
@@ -57,7 +60,7 @@ html {
 .league-column img {
     width: 90%; /* Slightly reduced to fit the design */
     height: auto;
-    border-radius: 50%; /* Fully rounded image */
+    border-radius: 5%; /* Fully rounded image */
     margin-bottom: 15px; /* Space below the image */
     object-fit: contain; /* Ensures the image covers the space properly */
 }

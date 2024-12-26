@@ -1,0 +1,77 @@
+.champions-container {
+    background-color: #003366; /* Dark Blue background */
+    padding: 30px;
+    color: white;
+    margin-top: 1px;
+  }
+  
+  .champions-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 35px;
+    font-family: Verdana;
+  }
+  
+  .champions-boxes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .champion-box {
+    background-color: #ffffff;
+    color: #003366;
+    text-align: center;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 280px;
+    width: 275px;
+  }
+  
+  .champion-box:hover {
+    transform: scale(1.05); /* Hover effect to scale up */
+  }
+  
+  .champion-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-family: Verdana;
+    font-weight: bold;
+  }
+  
+  .team-name {
+    font-size: 1.2rem;
+    font-family: Verdana;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+  }
+  
+  .team-logo {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-top: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .champions-boxes {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns layout for medium screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .champions-boxes {
+      grid-template-columns: 1fr; /* Single column layout for small screens */
+    }
+  
+    .champions-title {
+      font-size: 1.5rem; /* Adjust title font size */
+    }
+  }
+  

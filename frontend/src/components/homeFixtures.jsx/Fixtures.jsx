@@ -2,18 +2,18 @@ import './Fixtures.css';
 
 const Fixtures = () => {
   const games = [
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "../../../public/Real_Madrid_CF.svg.webp", team2Logo: "../../../public/FC_Barcelona_(crest).svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "2 : 0", date: "Jan 1, 2024", time: "19:00" }, 
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "5 : 0", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "2 : 3", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
 
 
     // Add more games as needed
@@ -30,10 +30,8 @@ const Fixtures = () => {
               <span className="vs">VS</span>
               <img src={game.team2Logo} alt="Team 2" className="team-logo" />
             </div>
-            <div className="game-info">
-              <span className="score">{game.score}</span>
-              <span className="date-time">{`${game.date}, ${game.time}`}</span>
-            </div>
+            <div className="score">{game.score}</div>
+            <div className="date-time">{`${game.date}, ${game.time}`}</div>
           </div>
         ))}
       </div>
