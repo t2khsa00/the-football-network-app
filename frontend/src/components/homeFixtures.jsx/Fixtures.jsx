@@ -1,42 +1,85 @@
+import { useState, useEffect } from 'react';
 import './Fixtures.css';
 
 const Fixtures = () => {
-  const games = [
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "2 : 0", date: "Jan 1, 2024", time: "19:00" }, 
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "5 : 0", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", score: "2 : 3", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
-    { team1Logo: "/FC_Barcelona_(crest).svg.webp", team2Logo: "/Real_Madrid_CF.svg.webp", date: "Jan 1, 2024", time: "19:00" },
+    const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    const leagueId = 2; // Champions League league ID (for the API)
 
-    // Add more games as needed
-  ];
+    const fetchFixtures = async () => {
+        try {
+            // Fetching upcoming fixtures for Champions League
+            const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueId}&next=18`; // "next=18" fetches upcoming fixtures
+            const options = {
+                method: 'GET',
+                headers: {
+                  'x-rapidapi-key': 'cc3966ad8amsh022b69077598bc1p1762acjsn9db201a954ca', // Use environment variable for this
+                  'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'      
+                },
+            };
 
-  return (
-    <div className="fixtures-container">
-      <h2 className="section-title">Todays Fixtures</h2>
-      <div className="fixtures">
-        {games.map((game, index) => (
-          <div className="fixture" key={index}>
-            <div className="teams">
-              <img src={game.team1Logo} alt="Team 1" className="team-logo" />
-              <span className="vs">VS</span>
-              <img src={game.team2Logo} alt="Team 2" className="team-logo" />
-            </div>
-            <div className="score">{game.score}</div>
-            <div className="date-time">{`${game.date}, ${game.time}`}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+
+            // Check if data.response exists and contains fixtures
+            if (data.response && data.response.length > 0) {
+                const fixtureData = data.response.map((game) => ({
+                    team1Logo: game.teams.home.logo,
+                    team2Logo: game.teams.away.logo,
+                    score: "TBD", // For upcoming fixtures, use TBD
+                    date: game.fixture.date.split('T')[0], // Extract date part
+                    time: game.fixture.date.split('T')[1].split('.')[0], // Extract time part
+                    status: game.fixture.status // Match status (LIVE, NS, etc.)
+                }));
+                setGames(fixtureData);
+            } else {
+                setGames([]); // No fixtures found
+            }
+        } catch (error) {
+            setError(`Error fetching Champions League data: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchFixtures();
+    }, []);
+
+    return (
+        <div className="fixtures-container">
+            <h2 className="section-title">Upcoming Champions League Fixtures</h2>
+
+            {loading ? (
+                <p>Loading fixtures...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : games.length === 0 ? (
+                <p>No upcoming fixtures available.</p>
+            ) : (
+                <div className="fixtures">
+                    {games.map((game, index) => (
+                        <div className="fixture" key={index}>
+                            <div className="teams">
+                                <img src={game.team1Logo} alt="Team 1" className="team-logo" />
+                                <span className="vs">VS</span>
+                                <img src={game.team2Logo} alt="Team 2" className="team-logo" />
+                            </div>
+                            <div className="score">{game.score}</div>
+                            <div className="date-time">{`${game.date}, ${game.time}`}</div>
+                            {/* Live status check */}
+                            {game.status === 'LIVE' && <span className="live-indicator">LIVE</span>}
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default Fixtures;

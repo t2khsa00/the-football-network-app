@@ -77,6 +77,18 @@
   color: #000000;
   font-family: Verdana;
 }
+/* CSS for the "LIVE" indicator */
+.live-indicator {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {

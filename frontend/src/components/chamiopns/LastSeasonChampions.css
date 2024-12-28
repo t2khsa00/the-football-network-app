@@ -1,80 +1,85 @@
+/* Container for the Champions section, similar to the Top Scorers */
 .champions-container {
-    background-color: #003366; 
-    padding: 30px;
-    color: white;
-    margin-top: 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .champions-title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 35px;
-    font-family: Verdana;
-    width: 100%;
-  }
-  
-  .champions-boxes {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    justify-items: center;
-    max-width: auto;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-  }
+  background-color: #003366; /* Deep blue background */
+  padding: 30px;
+  color: #ecf0f1; /* Light grey text for better readability */
+  margin-top: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .champions-boxes::-webkit-scrollbar {
-    display: none; /* WebKit browsers */
-  }
-  
-  
-  .champion-box {
-    background-color: #ffffff;
-    color: #003366;
-    text-align: center;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    height: 280px;
-    width: 275px;
-  }
-  
-  .champion-box:hover {
-    transform: scale(1.02)
-  }
-  
-  .champion-box h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    font-family: Verdana;
-    font-weight: bold;
-  }
-  
-  .team-name {
-    font-size: 1.2rem;
-    font-family: Verdana;
-    margin-bottom: 20px;
-    font-weight: bold;
+/* Title styling similar to section titles */
+.champions-title {
+  text-align: center;
+  font-size: 28px; /* Similar to the other titles for consistency */
+  margin-bottom: 35px;
+  font-weight: bold;
+  color: #f5f6fa; /* Crisp white for contrast */
+  font-family: Verdana;
+  width: 100%;
+}
 
-  }
-  
-  .team-logo {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    margin-top: 10px;
-  }
+/* Styling the grid container similar to scorers grid */
+.champions-boxes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-items: center;
+  max-width: auto;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
 
+.champions-boxes::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+/* Each champion's box styled similar to league-column */
+.champion-box {
+  background: linear-gradient(145deg, #16213e, #0f3460); /* Consistent gradient background */
+  color: #ffffff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  height: 280px;
+  width: 275px;
+}
+
+/* Hover effects for champion boxes, consistent with league-column */
+.champion-box:hover {
+  transform: scale(1.02); /* Scale effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Intensified shadow on hover */
+}
+
+/* Champion box titles */
+.champion-box h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Team name styling */
+.team-name {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Team logo styling */
+.team-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-top: 10px;
+}
   /* Responsive Design */
 @media (max-width: 1024px) {
   .champions-boxes {
