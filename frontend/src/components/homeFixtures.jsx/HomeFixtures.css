@@ -1,0 +1,137 @@
+.home-fixtures-container {
+  padding-bottom: 20px;
+  background-color: #003366; /* Dark blue background */
+  color: white;
+  margin-top: 0.5px;
+  overflow-x: hidden; /* Hide the overflow */
+  padding-top: 25px;
+  padding-bottom: 35px;
+}
+
+.home-fixtures-section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #f5f6fa;
+  padding-bottom: 10px;
+}
+
+.home-fixtures {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* Increased gap for better spacing */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  padding: 10px 20px; /* Add padding for better spacing */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.home-fixtures::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.home-fixture {
+  background: linear-gradient(145deg, #16213e, #0f3460);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 8px 8px 20px #0c223d, -8px -8px 20px #122c54;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 210px; /* Increased height */
+  width: 450px; /* Increased width */
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.home-fixture:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.home-fixture-team-logo {
+  margin-top: 5px;
+  width: 90px; /* Adjusted width */
+  height: 90px; /* Adjusted height */
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.home-fixture-teams {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.home-fixture-vs {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.home-fixture-score {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff4040;
+  margin-bottom: 5px;
+}
+
+.home-fixture-date-time {
+  font-size: 14px;
+  font-family: Verdana;
+  font-weight: bold;
+  color: #ffffff;
+  display: flex;
+  justify-content: center; /* Center aligns horizontally */
+  align-items: center; /* Center aligns vertically */
+  flex-direction: row; /* Ensures date and time are on the same line */
+  gap: 5px; /* Space between date and time */
+  margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-fixtures {
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .home-fixture {
+    height: 180px; /* Further reduce height for medium screens */
+    width: 320px; /* Adjust width for medium screens */
+  }
+
+  .home-fixture-team-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .home-fixture-vs, .home-fixture-score, .home-fixture-date-time {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-fixtures {
+    gap: 15px;
+    padding: 5px;
+  }
+
+  .home-fixture {
+    height: 160px; /* Further reduce height for small screens */
+    width: 250px; /* Reduce width for small screens */
+  }
+
+  .home-fixture-team-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .home-fixture-vs, .home-fixture-score, .home-fixture-date-time {
+    font-size: 12px;
+  }
+}

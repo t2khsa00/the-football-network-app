@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import './Fixtures.css';
+import './HomeFixtures.css';
 
-const Fixtures = () => {
+const HomeFixtures = () => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ const Fixtures = () => {
             const options = {
                 method: 'GET',
                 headers: {
-                  'x-rapidapi-key': 'cc3966ad8amsh022b69077598bc1p1762acjsn9db201a954ca', // Use environment variable for this
+                  'x-rapidapi-key': 'cc3966ad8amsh022b69077598bc1p1762acjsn9db201a954ca',
                   'x-rapidapi-host': 'api-football-v1.p.rapidapi.com'      
                 },
             };
@@ -32,8 +32,8 @@ const Fixtures = () => {
                     team1Logo: game.teams.home.logo,
                     team2Logo: game.teams.away.logo,
                     score: "TBD", // For upcoming fixtures, use TBD
-                    date: game.fixture.date.split('T')[0], // Extract date part
-                    time: game.fixture.date.split('T')[1].split('.')[0], // Extract time part
+                    date: new Date(game.fixture.date).toISOString().split('T')[0],
+                    time: new Date(game.fixture.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }), // Format time as HH:MM
                     status: game.fixture.status // Match status (LIVE, NS, etc.)
                 }));
                 setGames(fixtureData);
@@ -52,8 +52,8 @@ const Fixtures = () => {
     }, []);
 
     return (
-        <div className="fixtures-container">
-            <h2 className="section-title">Upcoming Champions League Fixtures</h2>
+        <div className="home-fixtures-container">
+            <h2 className="home-fixtures-section-title">Upcoming Champions League Fixtures</h2>
 
             {loading ? (
                 <p>Loading fixtures...</p>
@@ -62,18 +62,18 @@ const Fixtures = () => {
             ) : games.length === 0 ? (
                 <p>No upcoming fixtures available.</p>
             ) : (
-                <div className="fixtures">
+                <div className="home-fixtures">
                     {games.map((game, index) => (
-                        <div className="fixture" key={index}>
-                            <div className="teams">
-                                <img src={game.team1Logo} alt="Team 1" className="team-logo" />
-                                <span className="vs">VS</span>
-                                <img src={game.team2Logo} alt="Team 2" className="team-logo" />
+                        <div className="home-fixture" key={index}>
+                            <div className="home-fixture-teams">
+                                <img src={game.team1Logo} alt="Team 1" className="home-fixture-team-logo" />
+                                <span className="home-fixture-vs">VS</span>
+                                <img src={game.team2Logo} alt="Team 2" className="home-fixture-team-logo" />
                             </div>
-                            <div className="score">{game.score}</div>
-                            <div className="date-time">{`${game.date}, ${game.time}`}</div>
+                            <div className="home-fixture-score">{game.score}</div>
+                            <div className="home-fixture-date-time">{`${game.date}, ${game.time}`}</div>
                             {/* Live status check */}
-                            {game.status === 'LIVE' && <span className="live-indicator">LIVE</span>}
+                            {game.status === 'LIVE' && <span className="home-fixture-live-indicator">LIVE</span>}
                         </div>
                     ))}
                 </div>
@@ -82,4 +82,4 @@ const Fixtures = () => {
     );
 };
 
-export default Fixtures;
+export default HomeFixtures;

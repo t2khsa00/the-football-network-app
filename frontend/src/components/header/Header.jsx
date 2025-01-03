@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Header.css'; // Custom styles for header
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaUserCircle } from 'react-icons/fa'; // Using react-icons for better icons
@@ -32,11 +33,11 @@ const Header = () => {
       <div className="header-lower d-flex justify-content-between align-items-center p-3">
         {/* Navbar Links */}
         <div className="navbar-links d-flex gap-4">
-          <a href="#news" className="nav-link">News</a>
-          <a href="#matches" className="nav-link">Matches</a>
-          <a href="#teams" className="nav-link">Teams</a>
-          <a href="#league" className="nav-link">Leagues</a>
-          <a href="#champiopnsLeague" className="nav-link">Champions League</a>
+          <Link to="/news" className="nav-link">News</Link>
+          <Link to="/matches" className="nav-link">Matches</Link>
+          <Link to="/teams" className="nav-link">Teams</Link>
+          <Link to="/leagues" className="nav-link">Leagues</Link>
+          <Link to="/champions-league" className="nav-link">Champions League</Link> {/* Updated with Link */}
         </div>
 
         {/* Search Bar */}

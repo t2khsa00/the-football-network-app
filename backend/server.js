@@ -10,23 +10,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Route: Get football standings
-app.get("/standings/:league/:season", async (req, res) => {
-  const { league, season } = req.params;
-
-  try {
-    const response = await axios.get(`https://${process.env.API_HOST}/v3/standings`, {
-      params: { league, season },
-      headers: {
-        "x-rapidapi-host": process.env.API_HOST,
-        "x-rapidapi-key": process.env.API_KEY,
-      },
-    });
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 app.get("/", (req, res) => {
     res.send("Welcome to The Football Network");

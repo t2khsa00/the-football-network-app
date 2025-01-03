@@ -1,4 +1,3 @@
-/* Container for the Champions section, similar to the Top Scorers */
 .champions-container {
   background-color: #003366; /* Deep blue background */
   padding: 30px;
@@ -11,145 +10,93 @@
   box-sizing: border-box;
 }
 
-/* Title styling similar to section titles */
 .champions-title {
   text-align: center;
-  font-size: 28px; /* Similar to the other titles for consistency */
+  font-size: 28px;
   margin-bottom: 35px;
   font-weight: bold;
-  color: #f5f6fa; /* Crisp white for contrast */
+  color: #f5f6fa;
   font-family: Verdana;
   width: 100%;
 }
 
-/* Styling the grid container similar to scorers grid */
-.champions-boxes {
+.champions-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   justify-items: center;
-  max-width: auto;
   width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
 }
 
-.champions-boxes::-webkit-scrollbar {
+.champions-grid::-webkit-scrollbar {
   display: none; /* Hide scrollbar for WebKit browsers */
 }
 
-/* Each champion's box styled similar to league-column */
-.champion-box {
-  background: linear-gradient(145deg, #16213e, #0f3460); /* Consistent gradient background */
+.champion-card {
+  background: linear-gradient(145deg, #16213e, #0f3460);
   color: #ffffff;
   text-align: center;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
-  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
   height: 280px;
   width: 275px;
 }
 
-/* Hover effects for champion boxes, consistent with league-column */
-.champion-box:hover {
-  transform: scale(1.02); /* Scale effect on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Intensified shadow on hover */
+.champion-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Champion box titles */
-.champion-box h3 {
+.champion-card h3 {
   font-size: 20px;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-/* Team name styling */
-.team-name {
+.champion-name {
   font-size: 16px;
   margin-bottom: 20px;
   font-weight: bold;
 }
 
-/* Team logo styling */
-.team-logo {
+.champion-logo {
   width: 140px;
   height: 140px;
   object-fit: contain;
   margin-top: 10px;
 }
-  /* Responsive Design */
+
+/* Responsive design rules */
 @media (max-width: 1024px) {
-  .champions-boxes {
+  .champions-grid {
     grid-template-columns: repeat(3, 1fr); /* 3 columns layout for tablets and small screens */
-  }
-
-  .champions-title {
-    font-size: 1.7rem; /* Slightly smaller title for tablets */
-  }
-
-  .champion-box {
-    height: 280px; /* Increase height for better visual proportion on tablets */
-  }
-
-  .team-logo {
-    width: 100px; /* Reduce logo size for tablets */
-    height: 100px; /* Reduce logo size for tablets */
-  }
-
-  .team-name {
-    font-size: 1rem; /* Adjust team name font size */
   }
 }
 
 @media (max-width: 768px) {
-  .champions-boxes {
+  .champions-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 columns layout for medium screens */
-  }
-
-  .champions-title {
-    font-size: 1.6rem; /* Adjust title font size for medium screens */
-  }
-
-  .champion-box {
-    height: 280px; /* Adjust height for better proportion */
-  }
-
-  .team-logo {
-    width: 100px;
-    height: 100px;
-  }
-
-  .team-name {
-    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .champions-boxes {
+  .champions-grid {
     grid-template-columns: 1fr; /* Single column layout for small screens */
   }
-
-  .champions-title {
-    font-size: 1.5rem; /* Adjust title font size for small screens */
-  }
-
-  .champion-box {
+  .champion-card {
     height: 220px; /* Decrease height for small screens */
+    width: 100%; /* Adjust width for small screens */
   }
-
-  .team-logo {
+  .champion-logo {
     width: 80px; /* Smaller logo size for small screens */
     height: 80px; /* Smaller logo size for small screens */
   }
-
-  .team-name {
+  .champion-name {
     font-size: 0.9rem; /* Adjust font size for smaller screens */
-  }
-
-  .champion-box h3 {
-    font-size: 1rem; /* Adjust league name font size */
   }
 }

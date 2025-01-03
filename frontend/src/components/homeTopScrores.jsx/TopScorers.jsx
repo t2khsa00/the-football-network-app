@@ -56,14 +56,14 @@ const TopScorers = () => {
 
     return (
         <div className="top-scorers-container">
-            <h2 className="section-title">Top Scorers around Top 5 Leagues</h2>
+            <h2 className="top-scorers-title">Top Scorers around Top 5 Leagues</h2>
             <div className="scorers-grid">
                 {Object.entries(topScorers).map(([league, scorer]) => scorer && (
-                    <div key={league} className="league-column">
+                    <div key={league} className="scorer-column">
                         <h3>{league}</h3>
-                        <img src={scorer.photo} alt={scorer.name} />
-                        <div className="player">
-                            <span className="player-name">{scorer.name}</span> : <span className="goals">{scorer.goals}</span>
+                        <img src={scorer.photo} alt={scorer.name} className="scorer-photo" />
+                        <div className="scorer-details">
+                            <span className="scorer-name">{scorer.name}</span> : <span className="scorer-goals">{scorer.goals}</span>
                         </div>
                     </div>
                 ))}
@@ -71,5 +71,6 @@ const TopScorers = () => {
         </div>
     );
 };
+
 
 export default TopScorers;
