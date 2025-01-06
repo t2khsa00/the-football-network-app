@@ -173,13 +173,13 @@
   }
 
   .team-filter label {
-    font-size: 0.8em;
+    font-size: 0.5em;
     margin-right: 6px;
   }
 
   .team-filter select {
     padding: 3px 6px;
-    font-size: 0.9em;
+    font-size: 0.5em;
   }
 }
 
@@ -213,16 +213,18 @@
     top: 30px;
     right: 5px;
     padding: 3px 6px;
+    height: fit-content;
+    width: 220px;
   }
 
   .team-filter label {
-    font-size: 0.8em;
-    margin-right: 4px;
+    font-size: 0.7em;
+    margin-right: 25px;
   }
 
   .team-filter select {
-    padding: 2px 4px;
-    font-size: 0.8em;
+    padding: 4px 1px;
+    font-size: 0.7em;
   }
 
 }

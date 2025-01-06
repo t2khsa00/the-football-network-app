@@ -135,7 +135,7 @@ const ChampionLeagueFixtures = () => {
     <div className="cl-fixtures">
       {/* Dropdown for selecting a team */}
       <div className="team-filter">
-        <label htmlFor="team-select">Filter by team</label>
+        <label htmlFor="team-select">Teams:</label>
         <select
           id="team-select"
           value={selectedTeam}
