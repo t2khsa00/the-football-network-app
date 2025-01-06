@@ -44,6 +44,9 @@
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .tab:hover {
