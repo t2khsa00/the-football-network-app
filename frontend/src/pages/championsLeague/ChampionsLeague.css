@@ -1,0 +1,113 @@
+.champions-league-page {
+  font-family: Arial, sans-serif;
+  background-color: #003366;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  color: #ffffff;
+}
+
+.champions-league-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #ffffff;
+  background-color: #003366;
+}
+
+.champions-league-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 80px;
+}
+
+.logo-img {
+  height: 100px;
+  width: auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: flex-end; 
+  flex: 2; 
+  padding-right: 60px; 
+}
+
+.tab {
+  padding: 10px 20px;
+  border: none;
+  background-color: #003366;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tab:hover {
+  background-color: #285090; 
+}
+
+.active {
+  background-color: #285090; 
+  color: #ffffff;
+}
+
+.tab-content {
+  width: 100%;
+  padding-top: 1px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .champions-league-logo {
+    padding-left: 20px; /* Less padding as screen narrows */
+  }
+
+  .tabs {
+    padding-right: 20px;
+  }
+
+  .tab {
+    padding: 8px 16px;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 768px) {
+  .champions-league-header {
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+
+  .champions-league-logo, .tabs {
+    padding-left: 0;
+    padding-right: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .tab {
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    height: 50px;
+  }
+
+  .tabs {
+    align-items: center; 
+  }
+
+  .tab {
+    align-items: center;
+    padding: 4px 8px;
+    font-size: 0.8em;
+  }
+}

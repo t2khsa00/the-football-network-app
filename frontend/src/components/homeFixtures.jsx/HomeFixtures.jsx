@@ -6,12 +6,12 @@ const HomeFixtures = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const leagueId = 2; // Champions League league ID (for the API)
+
 
     const fetchFixtures = async () => {
         try {
             // Fetching upcoming fixtures for Champions League
-            const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueId}&next=18`; // "next=18" fetches upcoming fixtures
+            const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=2&next=18`; // "next=18" fetches upcoming fixtures
             const options = {
                 method: 'GET',
                 headers: {

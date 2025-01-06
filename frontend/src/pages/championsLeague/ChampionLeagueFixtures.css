@@ -1,0 +1,171 @@
+.cl-fixtures {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 20px;
+  padding: 20px;
+}
+.current-month-button {
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.current-month-button.hidden {
+  opacity: 0;
+}
+
+.current-month-button:hover {
+  background-color: #0056b3;
+}
+
+.cl-month {
+  font-size: 1.8em; /* Larger font size for the month */
+  color: #FFB81C;
+  margin: 5px 0;
+  padding-left: 10px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #fde8e8;
+}
+
+.cl-match-item {
+  display: flex;
+  flex-direction: column; /* Stack information vertically */
+  align-items: center; /* Center align the items */
+  padding: 15px;
+  border-bottom: 1px solid #ffffff;
+  margin-bottom: 10px;
+}
+
+.cl-match-info {
+  width: 100%; /* Ensure it spans the container */
+  display: flex;
+  justify-content: space-between; /* Space out date and match day details */
+  margin-bottom: 10px;
+}
+
+.cl-match-date-time, .cl-match-day {
+  font-size: 1.1em; /* Increased font size for visibility */
+  color: #c9c5c5;
+}
+.cl-teams-scores {
+  display: flex;
+  justify-content: space-between; /* Align elements from side to side */
+  align-items: center;
+  width: 100%;
+  font-size: 1.4em;
+}
+
+.cl-team {
+  display: flex;
+  align-items: center;
+}
+
+.cl-team-home {
+  justify-content: flex-start; /* Align home team to the left */
+  flex: 1;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.cl-team-away {
+  justify-content: flex-end; /* Align away team to the right */
+  flex: 1;
+  text-align: right; /* Ensure text is aligned to the right */
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.cl-team-logo {
+  width: 80px;
+  height: 75px;
+  margin: 10px;
+  object-fit: contain;
+  align-items: center;
+}
+.cl-score-container {
+  font-size: 1.1em; /* Larger score font */
+  color: #FFB81C ;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0.3; /* Prevents the score from stretching */
+}
+/* Media Queries for Responsive Adjustments */
+@media (max-width: 768px) {
+  .cl-fixtures {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .cl-month {
+    font-size: 1.5em; /* Adjust font size for smaller screens */
+  }
+
+  .cl-match-date-time, .cl-match-day {
+    font-size: 1em; /* Adjust font size for smaller screens */
+  }
+
+  .cl-teams-scores {
+    font-size: 1.2em; /* Adjust font size for smaller screens */
+  }
+
+  .cl-team-logo {
+    width: 50px; /* Adjust logo size for smaller screens */
+  }
+
+  .cl-score-container {
+    margin: 0 20px; /* Adjust margin for smaller screens */
+  }
+
+  .current-month-button {
+    bottom: 10px; /* Adjust position for smaller screens */
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+    font-size: 0.9em; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .cl-fixtures {
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .cl-month {
+    font-size: 1em; /* Further adjust font size for very small screens */
+  }
+
+  .cl-match-date-time, .cl-match-day {
+    font-size: 0.7em; /* Further adjust font size for very small screens */
+  }
+
+  .cl-teams-scores {
+    font-size: 0.8em; /* Further adjust font size for very small screens */
+  }
+
+  .cl-team-logo {
+    width: 40px; /* Further adjust logo size for very small screens */
+  }
+
+  .cl-score-container {
+    margin: 0 10px; /* Further adjust margin for very small screens */
+  }
+
+  .current-month-button {
+    bottom: 5px; /* Further adjust position for very small screens */
+    padding: 6px 12px; /* Further adjust padding for very small screens */
+    font-size: 0.8em; /* Further adjust font size for very small screens */
+  }
+}
