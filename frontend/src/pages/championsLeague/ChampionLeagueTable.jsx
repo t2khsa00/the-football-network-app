@@ -1,37 +1,141 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import './ChampionLeagueTable.css';
 
-const Table = () => {
-  const [tableData, setTableData] = useState([]);
+const ChampionLeagueTable = () => {
+  const [standings, setStandings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  const renderScore = (team) => {
+    return `${team.goalsFor} : ${team.goalsAgainst}`;
+  };
+
+  const getGoalDifference = (team) => {
+    return team.goalsFor - team.goalsAgainst;
+  };
+
+  
 
   useEffect(() => {
-    // Mock data or API call to fetch table data
-    const mockTable = [
-      { team: 'Real Madrid', points: 12, goals: 25, matches: 6 },
-      { team: 'Manchester City', points: 10, goals: 22, matches: 6 },
-      // Add more mock data
-    ];
-    setTableData(mockTable);
+    const fetchStandings = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const cached = localStorage.getItem('clStandings');
+        if (cached) {
+          const parsedCache = JSON.parse(cached);
+          const { data, timestamp } = parsedCache;
+
+          const cacheDuration = 6 * 60 * 60 * 1000; // 6 hours in ms
+          const isCacheValid = Date.now() - timestamp < cacheDuration;
+
+          if (isCacheValid) {
+            // Use the cached data
+            setStandings(data);
+            setLoading(false);
+            return;
+          }
+        }
+        // 1) Fetch from API-Football (Champions League 2024-2025, league=2, season=2024)
+        const response = await fetch(
+          'https://api-football-v1.p.rapidapi.com/v3/standings?league=2&season=2024',
+          {
+            method: 'GET',
+            headers: {
+              'x-rapidapi-key': 'cc3966ad8amsh022b69077598bc1p1762acjsn9db201a954ca',
+              'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const rawStandings =
+          data?.response?.[0]?.league?.standings?.[0] || [];
+
+        const transformedStandings = rawStandings.map((item) => ({
+          rank: item.rank,
+          logo: item.team.logo,
+          teamName: item.team.name,
+          gp: item.all.played,
+          w: item.all.win,
+          d: item.all.draw,
+          l: item.all.lose,
+          goalsFor: item.all.goals.for,
+          goalsAgainst: item.all.goals.against,
+          points: item.points,
+        }));
+
+        localStorage.setItem(
+          'clStandings',
+          JSON.stringify({
+            data: transformedStandings,
+            timestamp: Date.now(),
+          })
+        );
+
+        setStandings(transformedStandings);
+      } catch (error) {
+        console.error('Error fetching real-time standings:', error.message);
+      }
+    };
+
+    fetchStandings();
   }, []);
 
+  if (loading) {
+    return <div className="cl-standings-container">Loading standings...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="cl-standings-container">
+        Error fetching standings: {error}
+      </div>
+    );
+  }
+
+
   return (
-    <div className="table">
-      <h2>Standings</h2>
-      <table>
+    <div className="cl-standings-container">
+      <h2 className="title">STANDINGS</h2>
+      <table className="cl-standings-table">
         <thead>
           <tr>
-            <th>Team</th>
-            <th>Points</th>
-            <th>Goals</th>
-            <th>Matches</th>
+            <th>RANK</th>
+            <th>TEAM</th>
+            <th>GP</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>SCORE</th>
+            <th>GD</th>
+            <th>P</th>
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row, index) => (
-            <tr key={index}>
-              <td>{row.team}</td>
-              <td>{row.points}</td>
-              <td>{row.goals}</td>
-              <td>{row.matches}</td>
+          {standings.map((team) => (
+            <tr key={team.rank}>
+              <td>{team.rank}.</td>
+              <td className="team">
+                <img
+                  src={team.logo}
+                  alt={`${team.teamName} logo`}
+                  className="team-logo"
+                />
+                <span>{team.teamName}</span>
+              </td>
+              <td>{team.gp}</td>
+              <td>{team.w}</td>
+              <td>{team.d}</td>
+              <td>{team.l}</td>
+              <td>{renderScore(team)}</td>
+              <td>{getGoalDifference(team)}</td>
+              <td>{team.points}</td>
             </tr>
           ))}
         </tbody>
@@ -40,4 +144,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default ChampionLeagueTable;

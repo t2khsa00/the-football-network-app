@@ -2,17 +2,57 @@ import './ChampionLeagueFixtures.css';
 import { useState, useEffect, useRef } from 'react';
 
 const ChampionLeagueFixtures = () => {
+  // -----------------------------
+  // 1) UI State
+  // -----------------------------
   const [matchesByMonth, setMatchesByMonth] = useState({});
   const [showCurrentButton, setShowCurrentButton] = useState(false);
   const [clickedCurrent, setClickedCurrent] = useState(false);
-  const [allTeams, setAllTeams] = useState([]); // <-- NEW state for all unique teams
-  const [selectedTeam, setSelectedTeam] = useState('All'); // <-- NEW state for the team filter
-
+  const [allTeams, setAllTeams] = useState([]); 
+  const [selectedTeam, setSelectedTeam] = useState('All');
   const currentMonthRef = useRef(null);
 
+  // -----------------------------
+  // 2) On Mount: Restore UI State + Fetch Fixtures
+  // -----------------------------
   useEffect(() => {
+    // (A) Restore UI-related state from localStorage if present
+    const savedUI = localStorage.getItem('clFixturesUI');
+    if (savedUI) {
+      const { savedSelectedTeam, savedClickedCurrent, savedShowCurrentButton } =
+        JSON.parse(savedUI);
+
+      // Only set if they exist; otherwise fallback to defaults
+      if (savedSelectedTeam) setSelectedTeam(savedSelectedTeam);
+      if (typeof savedClickedCurrent === 'boolean') {
+        setClickedCurrent(savedClickedCurrent);
+      }
+      if (typeof savedShowCurrentButton === 'boolean') {
+        setShowCurrentButton(savedShowCurrentButton);
+      }
+    }
+
+    // (B) Now fetch the fixtures (with caching for the data)
     const fetchFixtures = async () => {
       try {
+        // 1. Check localStorage for cached fixture data
+        const cached = localStorage.getItem('clFixtures');
+        if (cached) {
+          const parsedCache = JSON.parse(cached);
+          const { data, teams, timestamp } = parsedCache;
+
+          const cacheDuration = 6 * 60 * 60 * 1000; // 6 hours
+          const isCacheValid = Date.now() - timestamp < cacheDuration;
+
+          if (isCacheValid) {
+            // Use cached fixture data
+            setMatchesByMonth(data);
+            setAllTeams(teams);
+            return; // Skip fetch
+          }
+        }
+
+        // 2. Fetch from the API if no valid cache
         const response = await fetch(
           'https://api-football-v1.p.rapidapi.com/v3/fixtures?league=2&season=2024',
           {
@@ -26,34 +66,61 @@ const ChampionLeagueFixtures = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();
+        const apiData = await response.json();
 
-        // 1. Group matches by month
-        const groupedMatches = groupMatchesByMonth(data.response);
+        // 3. Group matches by month
+        const groupedMatches = groupMatchesByMonth(apiData.response);
 
-        // 2. Extract all unique teams
-        const teams = new Set();
-        data.response.forEach((match) => {
-          teams.add(match.teams.home.name);
-          teams.add(match.teams.away.name);
+        // 4. Extract all unique teams
+        const teamsSet = new Set();
+        apiData.response.forEach((match) => {
+          teamsSet.add(match.teams.home.name);
+          teamsSet.add(match.teams.away.name);
         });
+        const sortedTeams = ['All', ...Array.from(teamsSet).sort()];
 
+        // 5. Set to component state
         setMatchesByMonth(groupedMatches);
-        setAllTeams(['All', ...Array.from(teams).sort()]); // Sort teams alphabetically
+        setAllTeams(sortedTeams);
+
+        // 6. Save fixture data to localStorage
+        localStorage.setItem(
+          'clFixtures',
+          JSON.stringify({
+            data: groupedMatches,
+            teams: sortedTeams,
+            timestamp: Date.now(),
+          })
+        );
       } catch (error) {
         console.error(`Error fetching Champions League data: ${error.message}`);
       }
     };
 
     fetchFixtures();
+
+    // Add scroll listener
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-   /* Hides the "Current" button after 4 seconds if it's shown and not clicked.
-   */
+  // -----------------------------
+  // 3) Save UI-Related State Changes to localStorage
+  // -----------------------------
+  useEffect(() => {
+    const uiState = {
+      savedSelectedTeam: selectedTeam,
+      savedClickedCurrent: clickedCurrent,
+      savedShowCurrentButton: showCurrentButton,
+    };
+    localStorage.setItem('clFixturesUI', JSON.stringify(uiState));
+  }, [selectedTeam, clickedCurrent, showCurrentButton]);
+
+  // -----------------------------
+  // 4) "Current" Button Hide Timer
+  // -----------------------------
   useEffect(() => {
     let timer;
     if (showCurrentButton && !clickedCurrent) {
@@ -64,12 +131,17 @@ const ChampionLeagueFixtures = () => {
     return () => clearTimeout(timer);
   }, [showCurrentButton, clickedCurrent]);
 
+  // -----------------------------
+  // 5) Scroll Logic
+  // -----------------------------
   const handleScroll = () => {
+    if (!currentMonthRef.current) return;
     const currentBox = currentMonthRef.current.getBoundingClientRect();
-    // Show button only if not currently viewing the current month or if scrolled away after clicking
+
+    // Show button only if not in view
     if (currentBox.top > window.innerHeight || currentBox.bottom < 0) {
       setShowCurrentButton(true);
-      setClickedCurrent(false); // Reset once the user scrolls away
+      setClickedCurrent(false); // Reset once user scrolls away
     } else {
       setShowCurrentButton(false);
     }
@@ -77,10 +149,13 @@ const ChampionLeagueFixtures = () => {
 
   const scrollToCurrentMonth = () => {
     currentMonthRef.current?.scrollIntoView({ behavior: 'smooth' });
-    setClickedCurrent(true); // Hide button after click
+    setClickedCurrent(true);
     setShowCurrentButton(false);
   };
 
+  // -----------------------------
+  // 6) Grouping
+  // -----------------------------
   const groupMatchesByMonth = (matches) => {
     return matches.reduce((acc, match) => {
       const date = new Date(match.fixture.date);
@@ -112,25 +187,30 @@ const ChampionLeagueFixtures = () => {
     }, {});
   };
 
+  // -----------------------------
+  // 7) Filtering
+  // -----------------------------
   const currentMonth = new Date().toLocaleString('default', {
     month: 'long',
     year: 'numeric',
   });
+  const filteredMatchesByMonth = Object.keys(matchesByMonth).reduce(
+    (acc, month) => {
+      const filteredMatches = matchesByMonth[month].filter((m) => {
+        if (selectedTeam === 'All') return true;
+        return m.home === selectedTeam || m.away === selectedTeam;
+      });
+      if (filteredMatches.length) {
+        acc[month] = filteredMatches;
+      }
+      return acc;
+    },
+    {}
+  );
 
-  // 3. Filter the matches by selected team
-  const filteredMatchesByMonth = Object.keys(matchesByMonth).reduce((acc, month) => {
-    // Filter out matches if a specific team is selected
-    const filteredMatches = matchesByMonth[month].filter((match) => {
-      if (selectedTeam === 'All') return true;
-      return match.home === selectedTeam || match.away === selectedTeam;
-    });
-
-    if (filteredMatches.length) {
-      acc[month] = filteredMatches;
-    }
-    return acc;
-  }, {});
-
+  // -----------------------------
+  // 8) Render
+  // -----------------------------
   return (
     <div className="cl-fixtures">
       {/* Dropdown for selecting a team */}
@@ -149,7 +229,6 @@ const ChampionLeagueFixtures = () => {
         </select>
       </div>
 
-      {/* The "Current" button, which hides itself if not clicked after 5 seconds */}
       {showCurrentButton && !clickedCurrent && (
         <button className="current-month-button" onClick={scrollToCurrentMonth}>
           Current

@@ -6,16 +6,19 @@
   align-items: center;
   padding-top: 20px;
   color: #ffffff;
+  width: 100%;
+  box-sizing: border-box; /* Helps avoid overflow issues */
 }
 
 .champions-league-header {
   display: flex;
+  width: 80%;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   padding-bottom: 1px;
   border-bottom: 1px solid #ffffff;
   background-color: #003366;
+  box-sizing: border-box;
 }
 
 .champions-league-logo {
@@ -28,6 +31,7 @@
 .logo-img {
   height: 100px;
   width: auto;
+  max-width: 100%; /* Prevents overflow */
 }
 
 .tabs {
@@ -35,6 +39,7 @@
   justify-content: flex-end; 
   flex: 2; 
   padding-right: 60px; 
+  box-sizing: border-box;
 }
 
 .tab {
@@ -44,9 +49,10 @@
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: Verdana;
+  font-family: Verdana, sans-serif;
   font-weight: bold;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .tab:hover {
@@ -58,15 +64,25 @@
   color: #ffffff;
 }
 
+/* Main content area */
 .tab-content {
   width: 100%;
+  padding-left: 160px;
+  padding-right: 160px;
   padding-top: 1px;
+  box-sizing: border-box;
 }
 
-/* Responsive Adjustments */
+/* --- Responsive Adjustments --- */
+
+/* Large tablet / smaller laptop screens */
 @media (max-width: 1024px) {
+  .champions-league-header {
+    width: 90%; /* Slightly more flexible */
+  }
+
   .champions-league-logo {
-    padding-left: 20px; /* Less padding as screen narrows */
+    padding-left: 20px;
   }
 
   .tabs {
@@ -77,40 +93,59 @@
     padding: 8px 16px;
     font-size: 0.95em;
   }
+
+  .tab-content {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
+/* Tablet and below */
 @media (max-width: 768px) {
   .champions-league-header {
+    width: 100%;
     justify-content: center;
     padding-bottom: 10px;
   }
 
-  .champions-league-logo, .tabs {
-    padding-left: 0;
-    padding-right: 40px;
-    justify-content: center;
+  .champions-league-logo {
+    padding-left: 55px;
     width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .tabs {
+    padding-right: 55px;
+    width: 100%;
+    justify-content: center;
   }
 
   .tab {
-    width: 100%;
+    width: auto; /* Let tabs shrink to content or wrap as needed */
     padding: 6px 12px;
     font-size: 0.9em;
   }
+
+  .tab-content {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
+/* Mobile phones */
 @media (max-width: 480px) {
   .logo-img {
     height: 50px;
   }
 
-  .tabs {
-    align-items: center; 
-  }
-
   .tab {
-    align-items: center;
     padding: 4px 8px;
     font-size: 0.8em;
+  }
+
+  .tab-content {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

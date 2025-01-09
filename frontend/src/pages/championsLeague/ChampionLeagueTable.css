@@ -1,0 +1,117 @@
+.cl-standings-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+/* Title styling */
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+/* Table base */
+.cl-standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 600px;
+}
+
+.cl-standings-table thead th {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #c5b1b1;
+  background-color: #003366; /* optional: dark header background for clarity */
+}
+
+.cl-standings-table tbody td {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 12px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #565377;
+  text-align: center; /* You can keep or remove if you want left align for some columns */
+}
+
+.cl-standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* TEAM column specifics */
+.team {
+  display: flex; /* Or flex if you prefer */
+  align-items: center;
+  gap: 16px; /* Adjust as needed */
+}
+
+.team-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+/* --- Media Queries --- */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .cl-standings-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .cl-standings-table thead th,
+  .cl-standings-table tbody td {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .cl-standings-container {
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .cl-standings-table thead th,
+  .cl-standings-table tbody td {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+  .team-logo {
+    width: 24px;
+    height: 24px;
+  }
+}
