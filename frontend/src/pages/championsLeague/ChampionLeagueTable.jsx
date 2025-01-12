@@ -6,16 +6,9 @@ const ChampionLeagueTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
-  const renderScore = (team) => {
-    return `${team.goalsFor} : ${team.goalsAgainst}`;
-  };
-
   const getGoalDifference = (team) => {
     return team.goalsFor - team.goalsAgainst;
   };
-
-  
 
   useEffect(() => {
     const fetchStandings = async () => {
@@ -27,7 +20,7 @@ const ChampionLeagueTable = () => {
           const parsedCache = JSON.parse(cached);
           const { data, timestamp } = parsedCache;
 
-          const cacheDuration = 6 * 60 * 60 * 1000; // 6 hours in ms
+          const cacheDuration = 6 * 60 * 60 * 1000;
           const isCacheValid = Date.now() - timestamp < cacheDuration;
 
           if (isCacheValid) {
@@ -37,7 +30,7 @@ const ChampionLeagueTable = () => {
             return;
           }
         }
-        // 1) Fetch from API-Football (Champions League 2024-2025, league=2, season=2024)
+        // Fetch from API-Football (Champions League 2024-2025, league=2, season=2024)
         const response = await fetch(
           'https://api-football-v1.p.rapidapi.com/v3/standings?league=2&season=2024',
           {
@@ -81,6 +74,8 @@ const ChampionLeagueTable = () => {
         setStandings(transformedStandings);
       } catch (error) {
         console.error('Error fetching real-time standings:', error.message);
+        setError(error.message);
+        setLoading(false);
       }
     };
 
@@ -99,7 +94,6 @@ const ChampionLeagueTable = () => {
     );
   }
 
-
   return (
     <div className="cl-standings-container">
       <h2 className="title">STANDINGS</h2>
@@ -108,13 +102,14 @@ const ChampionLeagueTable = () => {
           <tr>
             <th>RANK</th>
             <th>TEAM</th>
-            <th>GP</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
-            <th>SCORE</th>
-            <th>GD</th>
-            <th>P</th>
+            <th>Played</th>
+            <th>Won</th>
+            <th>Draw</th>
+            <th>Lost</th>
+            <th>For</th>
+            <th>Against</th>
+            <th>Difference</th>
+            <th>Points</th>
           </tr>
         </thead>
         <tbody>
@@ -133,7 +128,8 @@ const ChampionLeagueTable = () => {
               <td>{team.w}</td>
               <td>{team.d}</td>
               <td>{team.l}</td>
-              <td>{renderScore(team)}</td>
+              <td>{team.goalsFor}</td>
+              <td>{team.goalsAgainst}</td>
               <td>{getGoalDifference(team)}</td>
               <td>{team.points}</td>
             </tr>

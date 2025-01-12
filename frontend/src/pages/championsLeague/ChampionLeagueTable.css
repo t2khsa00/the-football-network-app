@@ -25,7 +25,7 @@
 /* Table base */
 .cl-standings-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0;
   min-width: 600px;
 }
@@ -53,17 +53,26 @@
   border-bottom: none;
 }
 
+.cl-standings-table thead th:nth-child(2) {
+  width: 30%; /* Make TEAM column significantly wider */
+}
+
+.cl-standings-table thead th:not(:nth-child(2)) {
+  width: 7%; /* Ensures all other columns share equal width */
+}
+
 /* TEAM column specifics */
 .team {
   display: flex; /* Or flex if you prefer */
   align-items: center;
-  gap: 16px; /* Adjust as needed */
+  gap: 40px; /* Adjust as needed */
 }
 
 .team-logo {
   width: 44px;
   height: 44px;
   object-fit: contain;
+  margin-left: 20px;
 }
 
 /* --- Media Queries --- */
