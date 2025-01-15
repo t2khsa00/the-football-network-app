@@ -108,7 +108,7 @@ const ChampionLeagueTable = () => {
             <th>Lost</th>
             <th>For</th>
             <th>Against</th>
-            <th>Difference</th>
+            <th>GD</th>
             <th>Points</th>
           </tr>
         </thead>
