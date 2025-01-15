@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'; 
-import Header from './components/header/Header';
-import TopScorers from './components/homeTopScrores.jsx/TopScorers';
-import News from './components/news/News';
-import LastSeasonChampions from './components/chamiopns/LastSeasonChampions';
-import Footer from './components/footer/Footer';
-import HomeFixtures from './components/homeFixtures.jsx/HomeFixtures';
+import Header from './pages/frontpage/header/Header';
+import TopScorers from './pages/frontpage/homeTopScrores.jsx/TopScorers';
+import News from './pages/frontpage/news/News';
+import LastSeasonChampions from './pages/frontpage/chamiopns/LastSeasonChampions';
+import Footer from './pages/frontpage/footer/Footer';
+import HomeFixtures from './pages/frontpage/homeFixtures.jsx/HomeFixtures';
 import ChampionsLeaguePage from './pages/championsLeague/ChampionsLeague';
 
 const App = () => {

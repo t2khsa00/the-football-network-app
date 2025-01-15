@@ -12,7 +12,7 @@ const ChampionsLeaguePage = () => {
     <div className="champions-league-page">
       <div className="champions-league-header">
         <div className="champions-league-logo">
-          <img src="/image.png" alt="Champions League Logo" className="logo-img" />
+          <img src="/cl_logo.png" alt="Champions League Logo" className="logo-img" />
         </div>
         <div className="tabs">
           <button

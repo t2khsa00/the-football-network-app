@@ -1,0 +1,55 @@
+.stats-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #003366;
+  color: white;
+  width: 100%;
+}
+
+/* Grid for Main Stats */
+.main-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .main-stats {
+    grid-template-columns: 1fr; /* Stack vertically on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-box {
+    padding: 10px; /* Reduce padding */
+  }
+
+  .goal-h3,
+  .assists-h3 {
+    font-size: 1.8rem; /* Smaller font size */
+  }
+
+  .goal-top-player-content,
+  .assists-top-player-content {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .goal-top-player-image,
+  .assists-top-player-image {
+    margin: 10px auto;
+    height: 150px; /* Adjust image size */
+  }
+
+  .goal-table td,
+  .assists-table td {
+    font-size: 0.9rem;
+    padding: 5px;
+  }
+
+  .goal-button,
+  .assists-button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}

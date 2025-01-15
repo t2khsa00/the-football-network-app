@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Pagination from '../pagination/Pagination'; 
-import '../pagination/Pagination.css';
+import Pagination from '../../../components/pagination/Pagination'; 
+import '../../../components/pagination/Pagination.css';
 import './News.css'; 
 const News = () => {
   // Sample data for news articles

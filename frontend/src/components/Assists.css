@@ -1,0 +1,90 @@
+.stat-box.assists {
+    width: 100%;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: Verdana;
+    font-size: 1.2rem;
+}
+
+.assists-h3 {
+    font-size: 1.8em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Top Player Card */
+.top-player-card.assists {
+    position: relative;
+    padding: 15px;
+    background: linear-gradient(135deg, #1a73e8, #003366);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.assists-rank-badge {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    background: #f4b400;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5%;
+}
+
+.assists-top-player-content {
+    display: flex;
+    align-items:end;
+    gap: 15px;
+}
+
+.assists-top-player-details {
+    flex: 1;
+}
+
+.assists-top-player-image {
+    height: 200px;
+    width: fit-content;
+    border-radius: 5%;
+}
+
+.assists-team-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Verdana;
+}
+.assists-top{
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Verdana;
+    margin-top: 50px;
+}
+.assists-stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Table */
+.assists-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.assists-table td {
+    padding: 10px;
+    border-bottom: 1px solid white;
+    color: #ffffff;
+}
+
+.assists-button {
+    background: #f4b400;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}

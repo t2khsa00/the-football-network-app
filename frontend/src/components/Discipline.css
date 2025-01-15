@@ -1,0 +1,138 @@
+/* Common Styles for Discipline (Yellow and Red Cards) */
+.stat-box.yellow,
+.stat-box.red {
+    width: 100%;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: Verdana;
+    font-size: 1.2rem;
+}
+
+/* Heading Styles */
+.yellow-h3,
+.red-h3 {
+    font-size: 1.8em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Top Player Card */
+.top-player-card.yellow {
+    position: relative;
+    padding: 15px;
+    background: linear-gradient(135deg, #FFB81C, #003366);/* Yellow color gradient */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.top-player-card.red {
+    position: relative;
+    padding: 15px;
+    background: linear-gradient(135deg, #1a73e8, #003366);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Rank Badge */
+.yellow-rank-badge,
+.red-rank-badge {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10%;
+}
+
+.yellow-rank-badge {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    background: #1a73e8; /* Highlight rank */
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10%;
+    }
+
+.red-rank-badge {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    background: #f4b400;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5%;
+}
+
+/* Player Content */
+.yellow-top-player-content,
+.red-top-player-content {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+}
+
+.yellow-top-player-details,
+.red-top-player-details {
+    flex: 1;
+}
+
+.yellow-top-player-image,
+.red-top-player-image {
+    height: 200px;
+    width: fit-content;
+    border-radius: 5%;
+}
+
+.yellow-team-name,
+.red-team-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Verdana;
+}
+
+.yellow-top,
+.red-top {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Verdana;
+    margin-top: 50px;
+}
+
+.yellow-stat-value,
+.red-stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Table */
+.yellow-table,
+.red-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.yellow-table td,
+.red-table td {
+    padding: 10px;
+    border-bottom: 1px solid white;
+    color: #ffffff;
+}
+
+/* Button */
+.yellow-button,
+.red-button {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
