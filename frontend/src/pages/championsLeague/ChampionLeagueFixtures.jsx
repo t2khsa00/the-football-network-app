@@ -1,10 +1,8 @@
 import './ChampionLeagueFixtures.css';
 import { useState, useEffect, useRef } from 'react';
+import { fetchFixtures } from '../../ApiServices/Api';
 
 const ChampionLeagueFixtures = () => {
-  // -----------------------------
-  // 1) UI State
-  // -----------------------------
   const [matchesByMonth, setMatchesByMonth] = useState({});
   const [showCurrentButton, setShowCurrentButton] = useState(false);
   const [clickedCurrent, setClickedCurrent] = useState(false);
@@ -12,17 +10,15 @@ const ChampionLeagueFixtures = () => {
   const [selectedTeam, setSelectedTeam] = useState('All');
   const currentMonthRef = useRef(null);
 
-  // -----------------------------
-  // 2) On Mount: Restore UI State + Fetch Fixtures
-  // -----------------------------
+ 
   useEffect(() => {
-    // (A) Restore UI-related state from localStorage if present
+    
     const savedUI = localStorage.getItem('clFixturesUI');
     if (savedUI) {
       const { savedSelectedTeam, savedClickedCurrent, savedShowCurrentButton } =
         JSON.parse(savedUI);
 
-      // Only set if they exist; otherwise fallback to defaults
+    
       if (savedSelectedTeam) setSelectedTeam(savedSelectedTeam);
       if (typeof savedClickedCurrent === 'boolean') {
         setClickedCurrent(savedClickedCurrent);
@@ -32,83 +28,39 @@ const ChampionLeagueFixtures = () => {
       }
     }
 
-    // (B) Now fetch the fixtures (with caching for the data)
-    const fetchFixtures = async () => {
+  
+    const fetchAndGroupFixtures = async () => {
       try {
-        // 1. Check localStorage for cached fixture data
-        const cached = localStorage.getItem('clFixtures');
-        if (cached) {
-          const parsedCache = JSON.parse(cached);
-          const { data, teams, timestamp } = parsedCache;
+        const leagueId = 2; 
+        const season = '2024';
+        const data = await fetchFixtures(leagueId, season);
 
-          const cacheDuration = 6 * 60 * 60 * 1000; // 6 hours
-          const isCacheValid = Date.now() - timestamp < cacheDuration;
+      
+        const groupedMatches = groupMatchesByMonth(data);
 
-          if (isCacheValid) {
-            // Use cached fixture data
-            setMatchesByMonth(data);
-            setAllTeams(teams);
-            return; // Skip fetch
-          }
-        }
-
-        // 2. Fetch from the API if no valid cache
-        const response = await fetch(
-          'https://api-football-v1.p.rapidapi.com/v3/fixtures?league=2&season=2024',
-          {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-key': 'cc3966ad8amsh022b69077598bc1p1762acjsn9db201a954ca',
-              'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const apiData = await response.json();
-
-        // 3. Group matches by month
-        const groupedMatches = groupMatchesByMonth(apiData.response);
-
-        // 4. Extract all unique teams
         const teamsSet = new Set();
-        apiData.response.forEach((match) => {
+        data.forEach((match) => {
           teamsSet.add(match.teams.home.name);
           teamsSet.add(match.teams.away.name);
         });
         const sortedTeams = ['All', ...Array.from(teamsSet).sort()];
 
-        // 5. Set to component state
+        
         setMatchesByMonth(groupedMatches);
         setAllTeams(sortedTeams);
-
-        // 6. Save fixture data to localStorage
-        localStorage.setItem(
-          'clFixtures',
-          JSON.stringify({
-            data: groupedMatches,
-            teams: sortedTeams,
-            timestamp: Date.now(),
-          })
-        );
       } catch (error) {
         console.error(`Error fetching Champions League data: ${error.message}`);
       }
     };
 
-    fetchFixtures();
+    fetchAndGroupFixtures();
 
-    // Add scroll listener
+  
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  // -----------------------------
-  // 3) Save UI-Related State Changes to localStorage
-  // -----------------------------
   useEffect(() => {
     const uiState = {
       savedSelectedTeam: selectedTeam,
@@ -118,9 +70,7 @@ const ChampionLeagueFixtures = () => {
     localStorage.setItem('clFixturesUI', JSON.stringify(uiState));
   }, [selectedTeam, clickedCurrent, showCurrentButton]);
 
-  // -----------------------------
-  // 4) "Current" Button Hide Timer
-  // -----------------------------
+
   useEffect(() => {
     let timer;
     if (showCurrentButton && !clickedCurrent) {
@@ -131,17 +81,15 @@ const ChampionLeagueFixtures = () => {
     return () => clearTimeout(timer);
   }, [showCurrentButton, clickedCurrent]);
 
-  // -----------------------------
-  // 5) Scroll Logic
-  // -----------------------------
+
   const handleScroll = () => {
     if (!currentMonthRef.current) return;
     const currentBox = currentMonthRef.current.getBoundingClientRect();
 
-    // Show button only if not in view
+   
     if (currentBox.top > window.innerHeight || currentBox.bottom < 0) {
       setShowCurrentButton(true);
-      setClickedCurrent(false); // Reset once user scrolls away
+      setClickedCurrent(false);
     } else {
       setShowCurrentButton(false);
     }
@@ -153,9 +101,6 @@ const ChampionLeagueFixtures = () => {
     setShowCurrentButton(false);
   };
 
-  // -----------------------------
-  // 6) Grouping
-  // -----------------------------
   const groupMatchesByMonth = (matches) => {
     return matches.reduce((acc, match) => {
       const date = new Date(match.fixture.date);
@@ -186,10 +131,6 @@ const ChampionLeagueFixtures = () => {
       return acc;
     }, {});
   };
-
-  // -----------------------------
-  // 7) Filtering
-  // -----------------------------
   const currentMonth = new Date().toLocaleString('default', {
     month: 'long',
     year: 'numeric',
@@ -207,10 +148,6 @@ const ChampionLeagueFixtures = () => {
     },
     {}
   );
-
-  // -----------------------------
-  // 8) Render
-  // -----------------------------
   return (
     <div className="cl-fixtures">
       {/* Dropdown for selecting a team */}

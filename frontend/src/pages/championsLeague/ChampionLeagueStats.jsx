@@ -1,13 +1,13 @@
-import Goals from "../../components/Goals";
-import Assists from "../../components/Assists";
+import Goals from "../../components/stats/Goals";
+import Assists from "../../components/stats/Assists";
+import YellowCards from "../../components/stats/YellowCards";
+import RedCards from "../../components/stats/RedCards";
 import './ChampionLeagueStats.css';
-import YellowCards from "../../components/YellowCards";
-import RedCards from "../../components/RedCards";
 
 
 const ChampionLeagueStats = () => {
-  const leagueId = 2; // Champions League ID
-  const season = "2024"; // Example season
+  const leagueId = 2;
+  const season = "2024";
 
   return (
     <div className="stats-page">

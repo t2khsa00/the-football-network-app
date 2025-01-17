@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Goals.css";
-import { fetchTopScorers } from "../api/cl_api/ClApi";
+import { fetchTopScorers } from "../../ApiServices/Api";
 import PropTypes from "prop-types";
 
 const Goal = ({ leagueId, season }) => {

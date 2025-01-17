@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./Discipline.css";
-import { fetchTopYellowCards } from "../api/cl_api/ClApi";
+import { fetchTopYellowCards } from "../../ApiServices/Api";
 
 const YellowCards = ({ leagueId, season }) => {
   const [topYellowCards, setTopYellowCards] = useState([]);
