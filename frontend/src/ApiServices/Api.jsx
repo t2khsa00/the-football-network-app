@@ -18,6 +18,10 @@ export const fetchStandings = async (leagueId, season) => {
   return response.data;
 };
 
+// ...........................//
+// Fetch statistics by Players //
+//...........................//
+
 // Fetch top scorers
 export const fetchTopScorers = async (leagueId, season) => {
   const response = await axios.get(`${BACKEND_URL}/topscorers`, {
@@ -49,3 +53,16 @@ export const fetchTopRedCards = async (leagueId, season) => {
   });
   return response.data;
 };
+
+
+// ...........................//
+// Fetch statistics by clubs //
+//...........................//
+
+export const fetchTeams = async (leagueId, season) => {
+  const response = await axios.get(`${BACKEND_URL}/team`, {
+    params: { leagueId, season },
+  });
+  return response.data.response;
+};
+

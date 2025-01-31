@@ -15,6 +15,7 @@ export const fetchFromApiFootball = async (endpoint, params = {}) => {
       headers: API_HEADERS,
       params,
     });
+    
     return response.data.response;
   } catch (error) {
     console.error(`Error fetching ${endpoint}:`, error.message);

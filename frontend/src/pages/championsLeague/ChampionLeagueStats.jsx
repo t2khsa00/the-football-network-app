@@ -1,8 +1,10 @@
-import Goals from "../../components/stats/Goals";
-import Assists from "../../components/stats/Assists";
-import YellowCards from "../../components/stats/YellowCards";
-import RedCards from "../../components/stats/RedCards";
-import './ChampionLeagueStats.css';
+import Goals from "../../components/playerStats/Goals";
+import Assists from "../../components/playerStats/Assists";
+import YellowCards from "../../components/playerStats/YellowCards";
+import RedCards from "../../components/playerStats/RedCards";
+import "./ChampionLeagueStats.css";
+
+// Player Stats
 
 
 const ChampionLeagueStats = () => {
@@ -11,6 +13,7 @@ const ChampionLeagueStats = () => {
 
   return (
     <div className="stats-page">
+      <h1>Champion League Stats</h1>
       <div className="main-stats">
         <Goals leagueId={leagueId} season={season} />
         <Assists leagueId={leagueId} season={season} />
