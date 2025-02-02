@@ -6,7 +6,7 @@ import TopScorers from './pages/frontpage/homeTopScrores.jsx/TopScorers';
 import News from './pages/frontpage/news/News';
 import LastSeasonChampions from './pages/frontpage/chamiopns/LastSeasonChampions';
 import Footer from './pages/frontpage/footer/Footer';
-import HomeFixtures from './pages/frontpage/homeFixtures.jsx/HomeFixtures';
+import HomeFixtures from './pages/frontpage/homeFixtures/HomeFixtures';
 import ChampionsLeaguePage from './pages/championsLeague/ChampionsLeague';
 
 const App = () => {

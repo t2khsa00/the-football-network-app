@@ -1,28 +1,20 @@
-import express from "express";
-import fixturesRoutes from "./fixtures.js";
-import standingsRoutes from "./standings.js";
-
-// for Players //
-import topScorersRoutes from "./topScorers.js";
-import topAssistsRoutes from "./topAssists.js";
-import topYellowCardsRoutes from "./topYellowCards.js";
-import topRedCardsRoutes from "./topRedCards.js";
-
-// for clubs //
-import teamRoutes from "./clubs/Team.js";
+import express from 'express';
+import fixtures from './fixtures.js';
+import standings from './standings.js';
+import team from './team.js';
+import topScorers from './topScorers.js';
+import topAssists from './topAssists.js';
+import topRedCards from './topRedCards.js';
+import topYellowCards from './topYellowCards.js';
 
 const router = express.Router();
 
-
-router.use("/fixtures", fixturesRoutes);
-router.use("/standings", standingsRoutes);
-// for Players //
-router.use("/topscorers", topScorersRoutes);
-router.use("/topassists", topAssistsRoutes);
-router.use("/topyellowcards", topYellowCardsRoutes);
-router.use("/topredcards", topRedCardsRoutes);
-
-// for Clubs //
-router.use("/team", teamRoutes);
+router.use('/fixtures', fixtures);
+router.use('/standings', standings);
+router.use('/team', team);
+router.use('/top-scorers', topScorers);
+router.use('/top-assists', topAssists);
+router.use('/top-red-cards', topRedCards);
+router.use('/top-yellow-cards', topYellowCards);
 
 export default router;

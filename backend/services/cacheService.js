@@ -1,11 +1,18 @@
-import NodeCache from "node-cache";
-
-const cache = new NodeCache({ stdTTL: 3600 }); // Cache for 1 hour
+const cache = new Map();
 
 export const setCache = (key, value) => {
-  cache.set(key, value);
+  cache.set(key, { value, timestamp: Date.now() });
 };
 
 export const getCache = (key) => {
-  return cache.get(key);
+  const cached = cache.get(key);
+  if (!cached) return null;
+
+  const isExpired = Date.now() - cached.timestamp > 3600000; // 1 hour
+  if (isExpired) {
+    cache.delete(key);
+    return null;
+  }
+
+  return cached.value;
 };

@@ -1,23 +1,16 @@
-import { Router } from "express";
-import { getCache, setCache } from "../services/cacheService.js";
-import { fetchFromApiFootball } from "../services/apiService.js";
+import express from 'express';
+import { fetchCards } from '../services/apiService.js';
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const { leagueId, season } = req.query;
-  const cacheKey = `topyellowcards_${leagueId}_${season}`;
-
+// Fetch top yellow cards for a specific season
+router.get('/:seasonId', async (req, res) => {
   try {
-    const cachedData = getCache(cacheKey);
-    if (cachedData) return res.json(cachedData);
-
-    const data = await fetchFromApiFootball("players/topyellowcards", { league: leagueId, season });
-    setCache(cacheKey, data);
-
-    res.json(data);
+    const { seasonId } = req.params;
+    const topYellowCards = await fetchCards(seasonId);
+    res.json(topYellowCards);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch yellow cards" });
+    res.status(500).json({ error: 'Failed to fetch top yellow cards' });
   }
 });
 

@@ -2,14 +2,14 @@ import express from 'express';
 import axios from 'axios';
 
 const router = express.Router();
-const BASE_URL = 'https://api.sportmonks.com/v3/football/fixtures';
+const BASE_URL = 'https://api.sportmonks.com/v3/football/teams';
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await axios.get(`${BASE_URL}/${req.params.id}`, {
       params: {
         api_token: process.env.SPORTSMONK_API_KEY,
-        include: 'participants,league',
+        include: 'squad,league',
       },
     });
     res.json(response.data);

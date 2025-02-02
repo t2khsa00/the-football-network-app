@@ -1,23 +1,52 @@
-import { Router } from "express";
-import { getCache, setCache } from "../services/cacheService.js";
-import { fetchFromApiFootball } from "../services/apiService.js";
+import express from 'express';
+import { fetchTopScorers, fetchPlayerStatistics } from '../services/apiService.js';
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const { leagueId, season } = req.query;
-  const cacheKey = `topassists_${leagueId}_${season}`;
-
+// Fetch top assists for a specific season
+router.get('/:seasonId', async (req, res) => {
   try {
-    const cachedData = getCache(cacheKey);
-    if (cachedData) return res.json(cachedData);
+    const { seasonId } = req.params;
 
-    const data = await fetchFromApiFootball("players/topassists", { league: leagueId, season });
-    setCache(cacheKey, data);
+    // Step 1: Fetch top scorers for the season
+    const topScorers = await fetchTopScorers(seasonId);
+    console.log('Top Scorers:', topScorers); // Log top scorers
 
-    res.json(data);
+    // Step 2: Fetch statistics for each player and extract assists
+    const playersWithAssists = await Promise.all(
+      topScorers.map(async (player) => {
+        try {
+          const playerStats = await fetchPlayerStatistics(player.player_id);
+          console.log('Player Stats for', player.player_id, ':', JSON.stringify(playerStats.statistics, null, 2)); // Log full statistics array
+
+          // Extract assists from the statistics array
+          const assists = playerStats.statistics?.reduce((total, stat) => {
+            return total + (stat.assists || 0); // Adjust based on the actual structure
+          }, 0);
+
+          return {
+            player_id: player.player_id,
+            player_name: player.player_name,
+            assists: assists || 0, // Default to 0 if assists are missing
+          };
+        } catch (error) {
+          console.error(`Error fetching stats for player ${player.player_id}:`, error);
+          return {
+            player_id: player.player_id,
+            player_name: player.player_name,
+            assists: 0, // Default to 0 if stats fetch fails
+          };
+        }
+      })
+    );
+
+    // Step 3: Sort players by assists (descending)
+    const topAssists = playersWithAssists.sort((a, b) => b.assists - a.assists);
+
+    res.json(topAssists);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch top assists" });
+    console.error('Error in /top-assists route:', error); // Log the full error
+    res.status(500).json({ error: 'Failed to fetch top assists' });
   }
 });
 

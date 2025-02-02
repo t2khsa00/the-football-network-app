@@ -1,23 +1,20 @@
-import { Router } from "express";
-import { getCache, setCache } from "../services/cacheService.js";
-import { fetchFromApiFootball } from "../services/apiService.js";
+import express from 'express';
+import axios from 'axios';
 
-const router = Router();
+const router = express.Router();
+const BASE_URL = 'https://api.sportmonks.com/v3/football/standings';
 
-router.get("/", async (req, res) => {
-  const { leagueId, season } = req.query;
-  const cacheKey = `standings_${leagueId}_${season}`;
-
+router.get('/', async (req, res) => {
   try {
-    const cachedData = getCache(cacheKey);
-    if (cachedData) return res.json(cachedData);
-
-    const data = await fetchFromApiFootball("standings", { league: leagueId, season });
-    setCache(cacheKey, data);
-
-    res.json(data);
+    const response = await axios.get(BASE_URL, {
+      params: {
+        api_token: process.env.SPORTSMONK_API_KEY,
+        include: 'participant,league',
+      },
+    });
+    res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch standings" });
+    res.status(500).json({ error: error.message });
   }
 });
 
